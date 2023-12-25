@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Offer;
+use App\Models\User;
+
 
 class HomeController extends Controller
 {
@@ -23,6 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $offersCounter = Offer::count();
+        $usersCounter = User::where(['role' => User::USER])->count();
+        return view('home', compact('offersCounter', 'usersCounter'));
     }
 }
